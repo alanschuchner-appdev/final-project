@@ -1,0 +1,62 @@
+<!-- Validation failure messages -->
+<% if @field.errors.any? %>
+  <% @field.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit field #<%= @field.id %>
+</h1>
+
+<hr>
+
+<form action="/update_field/<%= @field.id %>" method="post">
+  <!-- Label and input for venue_id -->
+  <div class="form-group">
+    <label for="venue_id">
+      Venue
+    </label>
+
+    <input type="text" id="venue_id" name="venue_id" class="form-control" value="<%= @field.venue_id %>">
+  </div>
+
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @field.name %>">
+  </div>
+
+  <!-- Label and input for price -->
+  <div class="form-group">
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" class="form-control" value="<%= @field.price %>">
+  </div>
+
+  <!-- Label and input for capacity -->
+  <div class="form-group">
+    <label for="capacity">
+      Capacity
+    </label>
+
+    <input type="text" id="capacity" name="capacity" class="form-control" value="<%= @field.capacity %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update field
+  </button>
+</form>
+
+<hr>
+
+<a href="/fields">
+  Go back
+</a>

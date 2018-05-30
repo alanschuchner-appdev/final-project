@@ -1,0 +1,58 @@
+<h1>
+  All timeslots
+</h1>
+
+<a href="/timeslots/new">
+  Add a new timeslot
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Slot time
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @timeslots.each do |timeslot| %>
+  <tr>
+    <td>
+      <%= timeslot.id %>
+    </td>
+
+    <td>
+      <%= timeslot.slot_time %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(timeslot.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(timeslot.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/timeslots/<%= timeslot.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

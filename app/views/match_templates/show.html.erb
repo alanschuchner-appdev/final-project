@@ -1,0 +1,56 @@
+<h1>
+  Match #<%= @match.id %> details
+</h1>
+
+<a href="/matches/<%= @match.id %>/edit">
+  Edit match
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Home score
+  </dt>
+  <dd>
+    <%= @match.home_score %>
+  </dd>
+
+  <dt>
+    Visitor score
+  </dt>
+  <dd>
+    <%= @match.visitor_score %>
+  </dd>
+
+  <dt>
+    Booking
+  </dt>
+  <dd>
+    <%= @match.booking_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@match.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@match.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_match/<%= @match.id %>">
+  Delete match
+</a>
+
+<hr>
+
+<a href="/matches">
+  Go back
+</a>

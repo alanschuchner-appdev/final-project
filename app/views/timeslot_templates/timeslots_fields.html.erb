@@ -1,0 +1,58 @@
+<h1 class="card card-header bg-primary text-white">
+  Bookings for <%= Venue.find(Field.find(@field_id).venue_id).name %>
+</h1>
+
+<hr>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Timeslot</th>
+      <th scope="col">Status</th>
+      <th scope="col">Booked Team</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+
+  <% @timeslots.each do |timeslot| %>
+  
+    <tr>
+      <td><%= timeslot.slot_time %></td>
+          
+          <% booked=0 %>
+          <% booked_team="" %>
+          
+          <% timeslot.bookings.each do |booking| %>
+              <% if booking.field_id.to_i==@field_id.to_i %>
+              <% booked=1 %>
+              <% booked_team=Team.find(booking.team_id).team_name %>
+              <% end %>
+          <% end %>
+          
+          <% if booked==1 %>
+              <td class="text-danger">Booked <i class="far fa-frown"></i></td>
+              <td><a href="/teams/<%= @team_id %>"><%= booked_team %></a></td>
+          <% else %>
+              <td class="text-success">Available! <i class="far fa-smile"></i></td>
+              <td></td>
+          <% end %>
+      
+      
+      <td>
+      <% if booked==0 %>
+          <form action="/create_booking" method="post">
+          <input type="hidden" name="field_id" value="<%= @field_id %>">
+          <input type="hidden" name="team_id" value="<%= @team_id %>">
+          <input type="hidden" name="timeslot_id" value="<%= timeslot.id %>">
+          
+          <button class="btn btn-primary">Book it!</button>
+          
+          </form>
+       <% end %>
+       </td>
+    </tr>
+    
+  <% end %>
+</table>
+          

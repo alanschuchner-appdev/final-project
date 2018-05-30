@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row">
+      
+        <div class="col-sm-12 text-center"> 
+        <h1 > Welcome to Fulbito! </h1>
+        <small class="text-muted">Select a venue to play with your friends</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB_nAWVr-18Oi_XoadzVHmNT2vevvJfev4"></script>
+          <script>
+            var map;
+            function initialize() {
+              var MyCenter = new google.maps.LatLng(-34.6070155, -58.4817298);
+              
+              <% @venues.each do |venue| %>
+            
+                
+                <% street_address = venue.address %>
+                <% url_safe_street_address = URI.encode(street_address) %>
+                
+                <% url_api="https://maps.googleapis.com/maps/api/geocode/json?address=" << url_safe_street_address.gsub(" ","+") << "&key=AIzaSyAtrPfaL0aDC2xnc92gfO0F9Es-YnbS4C4" %>
+                <% raw_data=open(url_api).read %>
+                <% parsed_data=JSON.parse(raw_data) %>
+                
+                
+                <% lat = parsed_data.dig("results", 0, "geometry", "location", "lat") %>
+                <% long = parsed_data.dig("results", 0, "geometry", "location", "lng") %>
+
+                var Venue<%= venue.id %> = new google.maps.LatLng(<%= lat %>,<%= long %>);
+                 
+              <% end %>
+              
+              var mapOptions = {
+                zoom: 11.5,
+                center: MyCenter
+              };
+              map = new google.maps.Map(document.getElementById('map-canvas'),
+              mapOptions);
+              
+             <% @venues.each do |venue| %> 
+              
+              var marker = new google.maps.Marker({
+                position: Venue<%= venue.id %>,
+                map: map,
+                title: '<%= venue.name %>'
+              });
+              
+              <% end %>
+            
+              
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+          </script>
+          <div id="map-canvas" style="width: 100%; height: 400px"></div>
+          
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-1 col-sm-9"></div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<h1 class="card card-header bg-success text-white">
+  List of venues
+</h1>
+
+<hr>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col"># of Fields</th>
+      <th scope="col">Average Price</th>
+      <th scope="col">Average Rating</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <% @venues.each do |venue| %>
+  
+    <tr>
+      <th scope="row"><%= venue.name %></th>
+      <td><%= venue.address %></td>
+      <td><%= venue.fields.count %></td>
+          <% sump=0.0 %>
+          <% countp=0.0 %>
+          <% venue.fields.each do |field| %>
+          <% sump=sump+field.price %>
+          <% countp=countp+1 %>
+          <% end %>
+          <% avgp=sump.to_f/countp.to_f %>
+      <td><%= number_to_currency(avgp, precision: 0) %></td>
+      
+          <% sumr=0.0 %>
+          <% countr=0.0 %>
+          <% venue.ratings.each do |rating| %>
+          <% sumr=sumr+rating.rating %>
+          <% countr=countr+1 %>
+          <% end %>
+          <% avgr=sumr/countr %>
+      <td class="text-warning"><i class="fas fa-star"><%= number_with_precision(avgr, precision: 2) %></td>
+      
+      <td><a href="/venues/<%= venue.id %>" class="btn btn-primary">Book a field Here!</a></td>
+    </tr>
+    
+  <% end %>
+</table>

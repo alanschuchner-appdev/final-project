@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @match.present? %>
+  <% if @match.errors.any? %>
+    <% @match.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new match
+</h1>
+
+<hr>
+
+<form action="/create_match" method="post">
+  <!-- Label and input for home_score -->
+  <div class="form-group">
+    <label for="home_score">
+      Home score
+    </label>
+
+    <input type="text" id="home_score" name="home_score" class="form-control" value="<%= @match.try(:home_score) %>">
+  </div>
+
+  <!-- Label and input for visitor_score -->
+  <div class="form-group">
+    <label for="visitor_score">
+      Visitor score
+    </label>
+
+    <input type="text" id="visitor_score" name="visitor_score" class="form-control" value="<%= @match.try(:visitor_score) %>">
+  </div>
+
+  <!-- Label and input for booking_id -->
+  <div class="form-group">
+    <label for="booking_id">
+      Booking
+    </label>
+
+    <input type="text" id="booking_id" name="booking_id" class="form-control" value="<%= @match.try(:booking_id) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create match
+  </button>
+</form>
+
+<hr>
+
+<a href="/matches">
+  Go back
+</a>

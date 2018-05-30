@@ -1,0 +1,31 @@
+<h1 class="card card-header bg-primary text-white">
+  My Bookings
+</h1>
+
+<hr>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Timeslot</th>
+      <th scope="col">Field</th>
+      <th scope="col">Venue</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+
+  <% @my_bookings.each do |booking| %>
+  
+    <tr>
+      <td><%= Timeslot.find(booking.timeslot_id).slot_time %></th>
+      <td><%= Field.find(booking.field_id).name %></a></td>
+      <td><%= Venue.find(Field.find(booking.field_id).venue_id).name %></td>
+      <td><a href="/delete_booking/<%= booking.id %>" class="btn btn-danger">Delete Booking</a></td>
+      <td>Associate Match</td>
+      
+    </tr>
+    
+  <% end %>
+</table>

@@ -1,0 +1,63 @@
+<!-- Validation failure messages -->
+<% if @booking.errors.any? %>
+  <% @booking.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit booking #<%= @booking.id %>
+</h1>
+
+<hr>
+
+<form action="/update_booking/<%= @booking.id %>" method="post">
+  <!-- Label and input for status -->
+  <div class="form-check">
+    <input type="hidden" value="0" name="status">
+    <input id="status" class="form-check-input" name="status" type="checkbox" value="1" <%= "checked" if @booking.status %>>
+
+    <label for="status" class="form-check-label">
+      Status
+    </label>
+  </div>
+
+  <!-- Label and input for field_id -->
+  <div class="form-group">
+    <label for="field_id">
+      Field
+    </label>
+
+    <input type="text" id="field_id" name="field_id" class="form-control" value="<%= @booking.field_id %>">
+  </div>
+
+  <!-- Label and input for timeslot_id -->
+  <div class="form-group">
+    <label for="timeslot_id">
+      Timeslot
+    </label>
+
+    <input type="text" id="timeslot_id" name="timeslot_id" class="form-control" value="<%= @booking.timeslot_id %>">
+  </div>
+
+  <!-- Label and input for team_id -->
+  <div class="form-group">
+    <label for="team_id">
+      Team
+    </label>
+
+    <input type="text" id="team_id" name="team_id" class="form-control" value="<%= @booking.team_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update booking
+  </button>
+</form>
+
+<hr>
+
+<a href="/bookings">
+  Go back
+</a>

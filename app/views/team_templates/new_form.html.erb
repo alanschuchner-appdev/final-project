@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @team.present? %>
+  <% if @team.errors.any? %>
+    <% @team.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new team
+</h1>
+
+<hr>
+
+<form action="/create_team" method="post">
+  <!-- Label and input for team_name -->
+  <div class="form-group">
+    <label for="team_name">
+      Team name
+    </label>
+
+    <input type="text" id="team_name" name="team_name" class="form-control" value="<%= @team.try(:team_name) %>">
+  </div>
+
+  <!-- Label and input for logo -->
+  <div class="form-group">
+    <label for="logo">
+      Logo
+    </label>
+
+    <input type="text" id="logo" name="logo" class="form-control" value="<%= @team.try(:logo) %>">
+  </div>
+
+  <!-- Label and input for captain -->
+  <div class="form-group">
+    <label for="captain">
+      Captain
+    </label>
+
+    <%= select_tag("captain", options_from_collection_for_select(Player.all, :id, :name, @team.try(1)), :class => "form-control") %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create team
+  </button>
+</form>
+
+<hr>
+
+<a href="/teams">
+  Go back
+</a>

@@ -1,0 +1,35 @@
+<!-- Validation failure messages -->
+<% if @timeslot.errors.any? %>
+  <% @timeslot.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit timeslot #<%= @timeslot.id %>
+</h1>
+
+<hr>
+
+<form action="/update_timeslot/<%= @timeslot.id %>" method="post">
+  <!-- Label and input for slot_time -->
+  <div class="form-group">
+    <label for="slot_time">
+      Slot time
+    </label>
+
+    <input type="text" id="slot_time" name="slot_time" class="form-control" value="<%= @timeslot.slot_time %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update timeslot
+  </button>
+</form>
+
+<hr>
+
+<a href="/timeslots">
+  Go back
+</a>

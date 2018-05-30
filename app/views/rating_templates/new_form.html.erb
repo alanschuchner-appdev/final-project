@@ -1,0 +1,45 @@
+<!-- Validation failure messages -->
+<% if @rating.present? %>
+  <% if @rating.errors.any? %>
+    <% @rating.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new rating for <%= Venue.find(@venue_rating).name %>
+</h1>
+
+<hr>
+
+<form action="/create_rating" method="post">
+  <!-- Label and input for rating -->
+  <div class="form-group">
+    <label for="rating">
+      Rating
+    </label>
+
+    <input type="text" id="rating" name="rating" class="form-control" value="<%= @rating.try(:rating) %>">
+  </div>
+
+  <!-- Label and input for player_id -->
+
+    <input type="hidden" id="player_id" name="player_id" class="form-control" value="<%= @player_rating %>">
+
+  <!-- Label and input for venue_id -->
+
+    <input type="hidden" id="venue_id" name="venue_id" class="form-control" value="<%= @venue_rating %>">
+
+  <button class="btn btn-block btn-outline-secondary">
+    Rate this venue!
+  </button>
+</form>
+
+<hr>
+
+<a href="/ratings">
+  Go back
+</a>

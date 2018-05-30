@@ -1,0 +1,37 @@
+<!-- Validation failure messages -->
+<% if @timeslot.present? %>
+  <% if @timeslot.errors.any? %>
+    <% @timeslot.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new timeslot
+</h1>
+
+<hr>
+
+<form action="/create_timeslot" method="post">
+  <!-- Label and input for slot_time -->
+  <div class="form-group">
+    <label for="slot_time">
+      Slot time
+    </label>
+
+    <input type="text" id="slot_time" name="slot_time" class="form-control" value="<%= @timeslot.try(:slot_time) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create timeslot
+  </button>
+</form>
+
+<hr>
+
+<a href="/timeslots">
+  Go back
+</a>

@@ -1,0 +1,32 @@
+<h1 class="card card-header bg-primary text-white">
+  All Teams
+</h1>
+
+<hr>
+
+<a href="/teams/new">Create New Team</a>
+
+<hr>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Team Name</th>
+      <th scope="col">Team Captain</th>
+      <th scope="col"># of Wins</th>
+
+    </tr>
+  </thead>
+
+  <% @teams.each do |team| %>
+  
+    <tr>
+      <td><img src="<%= team.logo %>" height="150" width="150"></th>
+      <td><a href="/teams/<%= team.id %>"><%= team.team_name %></a></td>
+      <td><%= Player.find(team.captain).name %></td>
+      <td><%= 5 %></td>
+    </tr>
+    
+  <% end %>
+</table>

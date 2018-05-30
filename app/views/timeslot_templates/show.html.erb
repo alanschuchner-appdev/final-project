@@ -1,0 +1,42 @@
+<h1>
+  Timeslot #<%= @timeslot.id %> details
+</h1>
+
+<a href="/timeslots/<%= @timeslot.id %>/edit">
+  Edit timeslot
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Slot time
+  </dt>
+  <dd>
+    <%= @timeslot.slot_time %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@timeslot.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@timeslot.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_timeslot/<%= @timeslot.id %>">
+  Delete timeslot
+</a>
+
+<hr>
+
+<a href="/timeslots">
+  Go back
+</a>

@@ -1,0 +1,47 @@
+<h1>Team <%= @my_team.team_name %></h1>
+<img src="<%= @my_team.logo %>" width="300" height="300">
+<br>
+<h3 class="text-muted">Captain: <%= Player.find(@my_team.captain).name %></h3>
+<a href="/teams/<%= @my_team.id %>/edit">Edit team</a>
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+
+    </div>
+    </div>
+
+
+    <div class="row">
+  <div class="col-md-8 offset-md-2">
+        <h3 class="card-title">
+          <%= @my_team.team_name %> Players
+        </h3>
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Name</th>
+      <th scope="col">Alias</th>
+      <th scope="col">Position</th>
+    </tr>
+  </thead>
+
+  <% @my_team.players.each do |player| %>
+  
+    <tr>
+      <th scope="row"><img src="<%= player.photo %>" width="100" height="100"></th>
+      <td><a href="players/<%= player.id %>"><%= player.name %></a></td>
+      <td><%= player.alias %></td>
+      <td><%= player.position %></td>
+    </tr>
+    
+  <% end %>
+</table>
+
+</div>
+</div>

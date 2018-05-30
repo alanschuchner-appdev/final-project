@@ -1,0 +1,28 @@
+<h1 class="card card-header bg-primary text-white">
+  All Players
+</h1>
+
+<hr>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Name</th>
+      <th scope="col">Alias</th>
+      <th scope="col">Team</th>
+
+    </tr>
+  </thead>
+
+  <% @players.each do |player| %>
+  
+    <tr>
+      <td><img src="<%= player.photo %>" height="150" width="150"></th>
+      <td><a href="/players/<%= player.id %>"><%= player.name %></a></td>
+      <td><%= player.alias %></td>
+      <td><a href="/teams/<%= player.team_id %>"><%= Team.find(player.team_id).team_name %></a></td>
+    </tr>
+    
+  <% end %>
+</table>

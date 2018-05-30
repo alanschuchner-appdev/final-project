@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @field.present? %>
+  <% if @field.errors.any? %>
+    <% @field.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new field
+</h1>
+
+<hr>
+
+<form action="/create_field" method="post">
+  <!-- Label and input for venue_id -->
+  <div class="form-group">
+    <label for="venue_id">
+      Venue
+    </label>
+
+    <%= select_tag("venue_id", options_from_collection_for_select(Venue.all, :id, :name, @field.try(:venue_id)), :class => "form-control") %>
+  </div>
+
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @field.try(:name) %>">
+  </div>
+
+  <!-- Label and input for price -->
+  <div class="form-group">
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" class="form-control" value="<%= @field.try(:price) %>">
+  </div>
+
+  <!-- Label and input for capacity -->
+  <div class="form-group">
+    <label for="capacity">
+      Capacity
+    </label>
+
+    <input type="text" id="capacity" name="capacity" class="form-control" value="<%= @field.try(:capacity) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create field
+  </button>
+</form>
+
+<hr>
+
+<a href="/fields">
+  Go back
+</a>

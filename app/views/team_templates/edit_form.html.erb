@@ -1,0 +1,53 @@
+<!-- Validation failure messages -->
+<% if @team.errors.any? %>
+  <% @team.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit team #<%= @team.id %>
+</h1>
+
+<hr>
+
+<form action="/update_team/<%= @team.id %>" method="post">
+  <!-- Label and input for team_name -->
+  <div class="form-group">
+    <label for="team_name">
+      Team name
+    </label>
+
+    <input type="text" id="team_name" name="team_name" class="form-control" value="<%= @team.team_name %>">
+  </div>
+
+  <!-- Label and input for logo -->
+  <div class="form-group">
+    <label for="logo">
+      Logo
+    </label>
+
+    <input type="text" id="logo" name="logo" class="form-control" value="<%= @team.logo %>">
+  </div>
+
+  <!-- Label and input for captain -->
+  <div class="form-group">
+    <label for="captain">
+      Captain
+    </label>
+
+    <%= select_tag("captain", options_from_collection_for_select(@team.players, :id, :name, @team.try(:team_id)), :class => "form-control") %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update team
+  </button>
+</form>
+
+<hr>
+
+<a href="/teams">
+  Go back
+</a>

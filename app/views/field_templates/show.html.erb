@@ -1,0 +1,63 @@
+<h1>
+  Field #<%= @field.id %> details
+</h1>
+
+<a href="/fields/<%= @field.id %>/edit">
+  Edit field
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Venue
+  </dt>
+  <dd>
+    <%= @field.venue_id %>
+  </dd>
+
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @field.name %>
+  </dd>
+
+  <dt>
+    Price
+  </dt>
+  <dd>
+    <%= @field.price %>
+  </dd>
+
+  <dt>
+    Capacity
+  </dt>
+  <dd>
+    <%= @field.capacity %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@field.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@field.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_field/<%= @field.id %>">
+  Delete field
+</a>
+
+<hr>
+
+<a href="/fields">
+  Go back
+</a>

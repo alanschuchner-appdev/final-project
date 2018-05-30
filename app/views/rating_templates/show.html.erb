@@ -1,0 +1,56 @@
+<h1>
+  Rating #<%= @rating.id %> details
+</h1>
+
+<a href="/ratings/<%= @rating.id %>/edit">
+  Edit rating
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Rating
+  </dt>
+  <dd>
+    <%= @rating.rating %>
+  </dd>
+
+  <dt>
+    Player
+  </dt>
+  <dd>
+    <%= @rating.player_id %>
+  </dd>
+
+  <dt>
+    Venue
+  </dt>
+  <dd>
+    <%= @rating.venue_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@rating.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@rating.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_rating/<%= @rating.id %>">
+  Delete rating
+</a>
+
+<hr>
+
+<a href="/ratings">
+  Go back
+</a>

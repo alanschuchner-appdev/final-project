@@ -1,0 +1,63 @@
+<h1>
+  Booking #<%= @booking.id %> details
+</h1>
+
+<a href="/bookings/<%= @booking.id %>/edit">
+  Edit booking
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Status
+  </dt>
+  <dd>
+    <%= @booking.status %>
+  </dd>
+
+  <dt>
+    Field
+  </dt>
+  <dd>
+    <%= @booking.field_id %>
+  </dd>
+
+  <dt>
+    Timeslot
+  </dt>
+  <dd>
+    <%= @booking.timeslot_id %>
+  </dd>
+
+  <dt>
+    Team
+  </dt>
+  <dd>
+    <%= @booking.team_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@booking.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@booking.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_booking/<%= @booking.id %>">
+  Delete booking
+</a>
+
+<hr>
+
+<a href="/bookings">
+  Go back
+</a>

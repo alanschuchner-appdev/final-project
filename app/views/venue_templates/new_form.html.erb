@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @venue.present? %>
+  <% if @venue.errors.any? %>
+    <% @venue.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new venue
+</h1>
+
+<hr>
+
+<form action="/create_venue" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @venue.try(:name) %>">
+  </div>
+
+  <!-- Label and input for address -->
+  <div class="form-group">
+    <label for="address">
+      Address
+    </label>
+
+    <input type="text" id="address" name="address" class="form-control" value="<%= @venue.try(:address) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create venue
+  </button>
+</form>
+
+<hr>
+
+<a href="/venues">
+  Go back
+</a>

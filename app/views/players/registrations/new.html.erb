@@ -1,0 +1,241 @@
+<div class="row">
+  <div class="offset-md-3 col-md-6">
+    <div class="card mb-3">
+      <h5 class="card-header">
+        <%= resource_name != "user" ? resource_name.to_s.titleize : "" %> Sign Up
+      </h5>
+
+      <div class="card-body">
+        <% was_validated = resource.errors.any? %>
+
+        <% form_html_options = { novalidate: true, class: "mb-3" } %>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options) do |f| %>
+          <div class="form-group">
+            <% email_was_invalid = resource.errors.include?(:email) %>
+
+            <% email_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if email_was_invalid %>
+                <% email_class << " is-invalid" %>
+              <% else %>
+                <% email_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :email %>
+
+            <%= f.email_field :email, class: email_class, autofocus: true %>
+
+            <% if email_was_invalid %>
+              <% resource.errors.full_messages_for(:email).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <% password_was_invalid = resource.errors.include?(:password) %>
+
+            <% password_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if password_was_invalid %>
+                <% password_class << " is-invalid" %>
+              <% else %>
+                <% password_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :password %>
+
+            <%= f.password_field :password, class: password_class %>
+
+            <% if password_was_invalid %>
+              <% resource.errors.full_messages_for(:password).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <% password_confirmation_was_invalid = resource.errors.include?(:password_confirmation) %>
+
+            <% password_confirmation_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if password_confirmation_was_invalid %>
+                <% password_confirmation_class << " is-invalid" %>
+              <% else %>
+                <% password_confirmation_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :password_confirmation %>
+
+            <%= f.password_field :password_confirmation, class: password_confirmation_class %>
+
+            <% if password_confirmation_was_invalid %>
+              <% resource.errors.full_messages_for(:password_confirmation).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          
+          <!-- Devise Input for name start -->
+          <div class="form-group">
+            <% name_was_invalid = resource.errors.include?(:name) %>
+
+            <% name_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if name_was_invalid %>
+                <% name_class << " is-invalid" %>
+              <% else %>
+                <% name_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :name %>
+
+            <%= f.text_field :name, :class => name_class, :placeholder => "Enter name" %>
+
+            <% if name_was_invalid %>
+              <% resource.errors.full_messages_for(:name).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for name end -->
+          
+          <!-- Devise Input for team_id start -->
+          <div class="form-group">
+            <% team_id_was_invalid = resource.errors.include?(:team_id) %>
+
+            <% team_id_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if team_id_was_invalid %>
+                <% team_id_class << " is-invalid" %>
+              <% else %>
+                <% team_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :team_id %>
+
+            <%= f.collection_select :team_id, Team.all, :id, :team_name, {}, :class => team_id_class, :placeholder => "Enter team id" %>
+
+            <% if team_id_was_invalid %>
+              <% resource.errors.full_messages_for(:team_id).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for team_id end -->
+          
+          <!-- Devise Input for position start -->
+          <div class="form-group">
+            <% position_was_invalid = resource.errors.include?(:position) %>
+
+            <% position_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if position_was_invalid %>
+                <% position_class << " is-invalid" %>
+              <% else %>
+                <% position_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :position %>
+
+            <%= f.text_field :position, :class => position_class, :placeholder => "Enter position" %>
+
+            <% if position_was_invalid %>
+              <% resource.errors.full_messages_for(:position).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for position end -->
+          
+          <!-- Devise Input for photo start -->
+          <div class="form-group">
+            <% photo_was_invalid = resource.errors.include?(:photo) %>
+
+            <% photo_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if photo_was_invalid %>
+                <% photo_class << " is-invalid" %>
+              <% else %>
+                <% photo_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :photo %>
+
+            <%= f.text_field :photo, :class => photo_class, :placeholder => "Enter photo" %>
+
+            <% if photo_was_invalid %>
+              <% resource.errors.full_messages_for(:photo).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for photo end -->
+          
+          <!-- Devise Input for alias start -->
+          <div class="form-group">
+            <% alias_was_invalid = resource.errors.include?(:alias) %>
+
+            <% alias_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if alias_was_invalid %>
+                <% alias_class << " is-invalid" %>
+              <% else %>
+                <% alias_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :alias %>
+
+            <%= f.text_field :alias, :class => alias_class, :placeholder => "Enter alias" %>
+
+            <% if alias_was_invalid %>
+              <% resource.errors.full_messages_for(:alias).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for alias end -->
+          <%= f.button class: "btn btn-outline-primary btn-block" %>
+
+          <hr>
+
+          <%= render "players/shared/links" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

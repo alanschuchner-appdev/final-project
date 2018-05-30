@@ -1,0 +1,65 @@
+<!-- Validation failure messages -->
+<% if @booking.present? %>
+  <% if @booking.errors.any? %>
+    <% @booking.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new booking
+</h1>
+
+<hr>
+
+<form action="/create_booking" method="post">
+  <!-- Label and input for status -->
+  <div class="form-check">
+    <input type="hidden" value="0" name="status">
+    <input id="status" class="form-check-input" name="status" type="checkbox" <%= "checked" if @booking.try(:status) %>>
+
+    <label for="status" class="form-check-label">
+      Status
+    </label>
+  </div>
+
+  <!-- Label and input for field_id -->
+  <div class="form-group">
+    <label for="field_id">
+      Field
+    </label>
+
+    <input type="text" id="field_id" name="field_id" class="form-control" value="<%= @booking.try(:field_id) %>">
+  </div>
+
+  <!-- Label and input for timeslot_id -->
+  <div class="form-group">
+    <label for="timeslot_id">
+      Timeslot
+    </label>
+
+    <input type="text" id="timeslot_id" name="timeslot_id" class="form-control" value="<%= @booking.try(:timeslot_id) %>">
+  </div>
+
+  <!-- Label and input for team_id -->
+  <div class="form-group">
+    <label for="team_id">
+      Team
+    </label>
+
+    <input type="text" id="team_id" name="team_id" class="form-control" value="<%= @booking.try(:team_id) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create booking
+  </button>
+</form>
+
+<hr>
+
+<a href="/bookings">
+  Go back
+</a>

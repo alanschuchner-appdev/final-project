@@ -1,0 +1,82 @@
+<h1>
+  All bookings
+</h1>
+
+<a href="/bookings/new">
+  Add a new booking
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Status
+    </th>
+
+    <th>
+      Field
+    </th>
+
+    <th>
+      Timeslot
+    </th>
+
+    <th>
+      Team
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @bookings.each do |booking| %>
+  <tr>
+    <td>
+      <%= booking.id %>
+    </td>
+
+    <td>
+      <%= booking.status %>
+    </td>
+
+    <td>
+      <%= booking.field_id %>
+    </td>
+
+    <td>
+      <%= booking.timeslot_id %>
+    </td>
+
+    <td>
+      <%= booking.team_id %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(booking.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(booking.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/bookings/<%= booking.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>
